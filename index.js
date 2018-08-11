@@ -87,11 +87,7 @@ async function convert(path) {
     return out
 }
 
-Promise.resolve(
-    convert(
-        'http://xmlusd.alphatoursdubai.com/webservice/OTA_HotelAvail.asmx?wsdl'
-    )
-)
+Promise.resolve(convert('http://www.webservicex.com/globalweather.asmx?wsdl'))
     .then(out => {
         fs.writeFileSync('output-postman.json', JSON.stringify(out, null, 2))
     })

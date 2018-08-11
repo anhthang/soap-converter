@@ -4,11 +4,11 @@
 
 ## Install
 ```
-npm i -g wsdl2postman
+npm i -g wsdl-to-postman
 ```
 ## Usage
 ```sh
-wsdl2postman -i <input.path> -o <out.path>
+wsdl-to-postman -i <input.path> -o <out.path>
 ```
 ## License
 MIT - [Anh Thang Bui][me]
