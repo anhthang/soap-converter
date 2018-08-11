@@ -1,0 +1,43 @@
+{
+  "name": "wsdl-to-postman",
+  "version": "0.0.1",
+  "description": "transform wsdl to postman collection",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "apiconnect-wsdl": "1.6.3",
+    "debug": "3.1.0",
+    "lodash": "4.17.4"
+  },
+  "devDependencies": {
+    "eslint": "4.19.1",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-prettier": "2.6.0",
+    "husky": "0.14.3",
+    "lint-staged": "7.1.0",
+    "prettier": "1.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "transform",
+    "wsdl",
+    "postman",
+    "collection"
+  ],
+  "author": "Anh Thang Bui <buianhthang89@gmail.com>",
+  "license": "MIT"
+}
