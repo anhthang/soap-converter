@@ -1,14 +1,11 @@
-# WSDL to Postman Collection
+# SOAP Converter
 
-> Transform WSDL file or URL to Postman Collection
+> Transform SOAP/WSDL descriptions to formats of your choice
 
 ## Install
 ```
-npm i -g wsdl-to-postman
-```
-## Usage
-```sh
-wsdl-to-postman -i <input.path> -o <out.path>
+yarn global add soap-converter
+# npm i -g soap-converter
 ```
 ## License
 MIT - [Anh Thang Bui][me]

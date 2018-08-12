@@ -1,13 +1,13 @@
-const debug = require('debug')('wsdl2postman:index')
+const debug = require('debug')('soap-converter:index')
 const apiWSDL = require('apiconnect-wsdl')
 const fs = require('fs')
 const { get } = require('lodash')
 
-async function convert(path) {
-    debug('convert')
+async function convert({ input, output, filename = 'output' }) {
+    debug('convert', input)
 
     let items = []
-    const wsdls = await apiWSDL.getJsonForWSDL(path)
+    const wsdls = await apiWSDL.getJsonForWSDL(input)
 
     const serviceData = apiWSDL.getWSDLServices(wsdls)
 
@@ -84,15 +84,7 @@ async function convert(path) {
 
     out.item = items
 
-    return out
+    fs.writeFileSync(`${output}/${filename}.json`, JSON.stringify(out, null, 2))
 }
 
-Promise.resolve(convert('http://www.webservicex.com/globalweather.asmx?wsdl'))
-    .then(out => {
-        fs.writeFileSync('output-postman.json', JSON.stringify(out, null, 2))
-    })
-    .catch(error => {
-        debug('convert error', error.stack)
-    })
-
-// module.exports = convert
+module.exports = convert
