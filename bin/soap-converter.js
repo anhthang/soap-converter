@@ -12,7 +12,7 @@ inquirer
         },
         {
             name: 'output',
-            message: 'Where you want to store output?'
+            message: 'Where do you want to store the output?'
         },
         {
             name: 'filename',
