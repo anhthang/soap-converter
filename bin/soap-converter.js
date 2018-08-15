@@ -11,12 +11,15 @@ inquirer
                 'What is your WSDL URL (http://example.com/service.svc?wsdl)?'
         },
         {
-            name: 'output',
-            message: 'Where do you want to store the output?'
+            name: 'target',
+            message: 'Target Description Format',
+            type: 'list',
+            choices: ['Postman', 'Insomnia']
         },
         {
-            name: 'filename',
-            message: 'What is file name of output?'
+            name: 'output',
+            message:
+                'Where do you want to store the output? (~/username/output.json)'
         }
     ])
     .then(answers => {

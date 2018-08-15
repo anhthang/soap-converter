@@ -10,6 +10,7 @@
     "apiconnect-wsdl": "1.6.3",
     "debug": "3.1.0",
     "inquirer": "6.1.0",
+    "insomnia-importers": "2.0.6",
     "lodash": "4.17.10"
   },
   "devDependencies": {
