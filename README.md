@@ -2,6 +2,10 @@
 
 > Transform SOAP/WSDL descriptions to formats of your choice
 
+[![npm](https://flat.badgen.net/npm/v/soap-converter)](https://npm.im/soap-converter)
+![download](https://flat.badgen.net/npm/dt/soap-converter)
+![license](https://flat.badgen.net/npm/license/soap-converter)
+
 _This version support tranform SOAP descriptions to Postman Collection (v2) only. I'll update others soon_
 
 ## Install
