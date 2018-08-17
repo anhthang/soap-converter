@@ -1312,7 +1312,7 @@ inquirer@^5.2.0:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-insomnia-importers@^2.0.6:
+insomnia-importers@2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/insomnia-importers/-/insomnia-importers-2.0.6.tgz#1c87360481bd541d6979e854d7451cc940b8afc8"
   dependencies:

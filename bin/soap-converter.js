@@ -14,7 +14,24 @@ inquirer
             name: 'target',
             message: 'Target Description Format',
             type: 'list',
-            choices: ['Postman', 'Insomnia']
+            choices: [
+                {
+                    name: 'Postman',
+                    value: 'Postman'
+                },
+                {
+                    name: 'Insomnia',
+                    value: 'Insomnia'
+                },
+                {
+                    name: 'Swagger (JSON)',
+                    value: 'SwaggerJSON'
+                },
+                {
+                    name: 'Swagger (YAML)',
+                    value: 'SwaggerYAML'
+                }
+            ]
         },
         {
             name: 'output',
