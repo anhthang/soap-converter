@@ -6,7 +6,11 @@
 ![download](https://flat.badgen.net/npm/dt/soap-converter)
 ![license](https://flat.badgen.net/npm/license/soap-converter)
 
-_This version support tranform SOAP descriptions to Postman Collection (v2) only. I'll update others soon_
+## Supported Formats
+
+- Postman v2.0
+- OpenAPI/Swagger v2.0 (JSON)
+- OpenAPI/Swagger v2.0 (YAML)
 
 ## Install
 ```
