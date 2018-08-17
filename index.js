@@ -20,22 +20,18 @@ async function convert({ input, output, target }) {
         items.push(swagger)
     }
 
-    let isJSONOutput = false
+    let isJSONOutput = true
     let out
     switch (target) {
         case 'Postman':
             out = converter.Postman(items)
-            isJSONOutput = true
-            break
-        case 'Insomnia':
-            out = await converter.Insomnia(items)
             break
         case 'SwaggerJSON':
             ;[out] = items
-            isJSONOutput = true
             break
         case 'SwaggerYAML':
             out = converter.Swagger(items[0])
+            isJSONOutput = false
             break
         default:
             throw new Error(`output format [${target}] currently not supported`)

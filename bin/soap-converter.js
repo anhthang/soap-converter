@@ -16,19 +16,15 @@ inquirer
             type: 'list',
             choices: [
                 {
-                    name: 'Postman',
+                    name: 'Postman v2.0',
                     value: 'Postman'
                 },
                 {
-                    name: 'Insomnia',
-                    value: 'Insomnia'
-                },
-                {
-                    name: 'Swagger (JSON)',
+                    name: 'OpenAPI/Swagger v2.0 (JSON)',
                     value: 'SwaggerJSON'
                 },
                 {
-                    name: 'Swagger (YAML)',
+                    name: 'OpenAPI/Swagger v2.0 (YAML)',
                     value: 'SwaggerYAML'
                 }
             ]
