@@ -29,6 +29,18 @@ program
         isAllowedValue('^(Postman|SwaggerJSON|SwaggerYAML)$')
     )
     .option('-o, --output <file>', 'output file (e.g. ~/output.json)')
+    .option(
+        '-k, --api-key-header <name>',
+        "specify an apiKey header name (e.g. 'X-API-Key')"
+    )
+    .option('--use-security', 'enable generating wssecurity', false)
+    .option(
+        '--use-ibm-datapower-gateway',
+        'enable IBM DataPower Gateway headers',
+        false
+    )
+    .option('--no-examples', 'disable generating examples', false)
+    .option('--no-inline-attributes', 'disable inline attributes', false)
     .action(options => {
         const prompts = []
 
