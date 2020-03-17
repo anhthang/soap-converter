@@ -1,13 +1,13 @@
 {
   "name": "soap-converter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Transform SOAP/WSDL descriptions to formats of your choice",
   "main": "index.js",
   "bin": {
     "soap-converter": "./bin/soap-converter.js"
   },
   "dependencies": {
-    "apiconnect-wsdl": "1.6.3",
+    "apiconnect-wsdl": "1.7.10",
     "commander": "4.1.1",
     "debug": "4.1.1",
     "inquirer": "7.0.6",
@@ -49,6 +49,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/buianhthang/soap-converter.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@buianhthang"
   },
   "bugs": {
     "url": "https://github.com/buianhthang/soap-converter/issues"
