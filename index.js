@@ -1,7 +1,6 @@
 const debug = require('debug')('soap-converter:index')
 const apiWSDL = require('apiconnect-wsdl')
 const fs = require('fs')
-const yaml = require('js-yaml')
 const Converter = require('./converters')
 
 async function convert(options) {
@@ -36,18 +35,13 @@ async function convert(options) {
         apis.map(({ openapi }) => openapi),
     )
 
-    let isJSONOutput = true
     let out
     switch (options.target) {
         case 'Postman':
             out = await Converter.Postman(openApis[0])
             break
-        case 'SwaggerJSON':
+        case 'Swagger':
             ;[out] = openApis
-            break
-        case 'SwaggerYAML':
-            out = yaml.dump(openApis[0])
-            isJSONOutput = false
             break
         default:
             throw new Error(
@@ -55,8 +49,7 @@ async function convert(options) {
             )
     }
 
-    const data = isJSONOutput ? JSON.stringify(out, null, 2) : out
-    fs.writeFileSync(options.output, data)
+    fs.writeFileSync(options.output, JSON.stringify(out, null, 2))
 }
 
 module.exports = convert

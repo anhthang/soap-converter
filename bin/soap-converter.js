@@ -22,9 +22,9 @@ program
         'wsdl url (e.g. http://example.com/service.svc?wsdl)',
     )
     .option(
-        '-t, --target <Postman|SwaggerJSON|SwaggerYAML>',
+        '-t, --target <Postman|Swagger>',
         'target type',
-        isAllowedValue('^(Postman|SwaggerJSON|SwaggerYAML)$'),
+        isAllowedValue('^(Postman|Swagger)$'),
     )
     .option('-o, --output <file>', 'output file (e.g. ~/output.json)')
     .option(
@@ -57,16 +57,12 @@ program
                 type: 'list',
                 choices: [
                     {
-                        name: 'Postman v2.0',
+                        name: 'Postman v2',
                         value: 'Postman',
                     },
                     {
-                        name: 'OpenAPI/Swagger v2.0 (JSON)',
-                        value: 'SwaggerJSON',
-                    },
-                    {
-                        name: 'OpenAPI/Swagger v2.0 (YAML)',
-                        value: 'SwaggerYAML',
+                        name: 'Swagger / OpenAPI v2',
+                        value: 'Swagger',
                     },
                 ],
             })

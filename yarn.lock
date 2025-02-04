@@ -4007,7 +4007,6 @@ __metadata:
     eslint-plugin-prettier: "npm:5.2.3"
     husky: "npm:9.1.7"
     inquirer: "npm:12.4.1"
-    js-yaml: "npm:4.1.0"
     lint-staged: "npm:15.4.3"
     openapi-to-postmanv2: "npm:^4.25.0"
     prettier: "npm:3.4.2"
