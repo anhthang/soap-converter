@@ -1,11 +1,9 @@
 {
   "name": "soap-converter",
   "version": "0.2.1",
-  "description": "Transform SOAP/WSDL descriptions to formats of your choice",
+  "description": "Instantly convert SOAP/WSDL to Postman and other API tool formats. Boost your API development.",
   "main": "index.js",
-  "bin": {
-    "soap-converter": "./bin/soap-converter.js"
-  },
+  "bin": "./bin/soap-converter.js",
   "dependencies": {
     "apiconnect-wsdl": "1.7.10",
     "commander": "4.1.1",
@@ -48,13 +46,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buianhthang/soap-converter.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@buianhthang"
+    "url": "git+https://github.com/anhthang/soap-converter.git"
   },
   "bugs": {
-    "url": "https://github.com/buianhthang/soap-converter/issues"
+    "url": "https://github.com/anhthang/soap-converter/issues"
   },
-  "homepage": "https://github.com/buianhthang/soap-converter#readme"
+  "homepage": "https://github.com/anhthang/soap-converter#readme",
+  "packageManager": "yarn@4.6.0"
 }
