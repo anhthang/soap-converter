@@ -1,6 +1,6 @@
 # SOAP Converter
 
-> Transform SOAP/WSDL descriptions to formats of your choice
+Instantly convert SOAP/WSDL to Postman and other API tool formats. Boost your API development.
 
 [![npm](https://flat.badgen.net/npm/v/soap-converter)](https://npm.im/soap-converter)
 ![download](https://flat.badgen.net/npm/dt/soap-converter)
@@ -24,7 +24,7 @@ yarn global add soap-converter
 * Enter your answers like image below and import output file to Postman
 
 <p align="center">
-  <img src="https://github.com/buianhthang/soap-converter/raw/master/example.png" alt="png">
+  <img src="https://github.com/anhthang/soap-converter/raw/master/example.png" alt="png">
 </p>
 
 ### Command Line Options

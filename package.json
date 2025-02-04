@@ -48,13 +48,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buianhthang/soap-converter.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@buianhthang"
+    "url": "git+https://github.com/anhthang/soap-converter.git"
   },
   "bugs": {
-    "url": "https://github.com/buianhthang/soap-converter/issues"
+    "url": "https://github.com/anhthang/soap-converter/issues"
   },
-  "homepage": "https://github.com/buianhthang/soap-converter#readme"
+  "homepage": "https://github.com/anhthang/soap-converter#readme"
 }
