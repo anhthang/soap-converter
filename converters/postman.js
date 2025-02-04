@@ -4,15 +4,15 @@ function convert(items) {
     const out = {
         info: {
             name: get(items[0], 'info.title'),
-            schema: 'https://schema.getpostman.com/json/collection/v2.0.0/' // required
-        }
+            schema: 'https://schema.getpostman.com/json/collection/v2.0.0/', // required
+        },
     }
 
-    out.item = items.map(i => {
+    out.item = items.map((i) => {
         const item = []
         const url = get(
             i,
-            'x-ibm-configuration.assembly.execute.0.proxy.target-url'
+            'x-ibm-configuration.assembly.execute.0.proxy.target-url',
         )
         for (const k in i.paths) { // eslint-disable-line
             const methods = i.paths[k]
@@ -34,31 +34,31 @@ function convert(items) {
                             {
                                 key: 'SOAPAction',
                                 value: get(api, 'x-ibm-soap.soap-action'),
-                                disabled: false
+                                disabled: false,
                             },
                             {
                                 key: 'Content-Type',
                                 value: get(i, 'consumes.0'),
-                                disabled: false
+                                disabled: false,
                             },
                             {
                                 key: 'Accept',
                                 value: get(i, 'produces.0'),
-                                disabled: false
-                            }
+                                disabled: false,
+                            },
                         ],
                         body: {
                             mode: 'raw',
-                            raw: example
-                        }
-                    }
+                            raw: example,
+                        },
+                    },
                 })
             }
         }
 
         return {
             name: get(i, 'info.title'),
-            item
+            item,
         }
     })
 

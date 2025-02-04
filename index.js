@@ -1,71 +1,57 @@
 const debug = require('debug')('soap-converter:index')
 const apiWSDL = require('apiconnect-wsdl')
 const fs = require('fs')
+const yaml = require('js-yaml')
 const converter = require('./converters')
 
 async function convert(options) {
-    debug('convert', options.input)
+    debug('convert', options)
 
     const wsdls = await apiWSDL.getJsonForWSDL(options.input)
     const serviceData = apiWSDL.getWSDLServices(wsdls)
 
-    const items = []
-    // Loop through all services
+    const opts = {
+        inlineAttributes: options.inlineAttributes,
+        suppressExamples: !options.examples,
+        // type: 'wsdl-to-rest',
+        wssecurity: options.useSecurity,
+    }
+
+    const services = []
     for (const item in serviceData.services) { // eslint-disable-line
-        const svcName = serviceData.services[item].service
-        const wsdlId = serviceData.services[item].filename
-        const wsdlEntry = apiWSDL.findWSDLForServiceName(wsdls, svcName)
+        const { service: svcName, filename: wsdlId } =
+            serviceData.services[item]
 
-        const swaggerOptions = {
-            inlineAttributes: options.inlineAttributes,
-            suppressExamples: !options.examples,
-            type: 'wsdl',
-            wssecurity: options.useSecurity
-        }
-
-        const swagger = apiWSDL.getSwaggerForService(
-            wsdlEntry,
+        const openapi = apiWSDL.createOpenApi(
+            options.input,
             svcName,
             wsdlId,
-            swaggerOptions
+            opts,
         )
 
-        if (!options.useIbmDatapowerGateway) {
-            delete swagger.info['x-ibm-name']
-            delete swagger['x-ibm-configuration']
-        }
-
-        if (options.apiKeyHeader) {
-            swagger.securityDefinitions.clientID.name = options.apiKeyHeader
-
-            if (!options.useIbmDatapowerGateway) {
-                // ApiKeyAuth is more swagger-standard than clientID
-                swagger.securityDefinitions.ApiKeyAuth =
-                    swagger.securityDefinitions.clientID
-                delete swagger.securityDefinitions.clientID
-                swagger.security = [{ ApiKeyAuth: [] }]
-            }
-        }
-
-        items.push(swagger)
+        services.push(openapi)
     }
+
+    const openApis = await Promise.all(services).then((apis) =>
+        apis.map(({ openapi }) => openapi),
+    )
 
     let isJSONOutput = true
     let out
     switch (options.target) {
         case 'Postman':
-            out = converter.Postman(items)
+            out = converter.Postman(openApis)
             break
         case 'SwaggerJSON':
-            ;[out] = items
+            ;[out] = openApis
             break
         case 'SwaggerYAML':
-            out = converter.Swagger(items[0])
+            out = yaml.dump(openApis[0])
             isJSONOutput = false
             break
         default:
             throw new Error(
-                `output format [${options.target}] currently not supported`
+                `output format [${options.target}] currently not supported`,
             )
     }
 
