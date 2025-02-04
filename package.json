@@ -6,27 +6,29 @@
   "bin": "./bin/soap-converter.js",
   "dependencies": {
     "apiconnect-wsdl": "1.7.10",
-    "commander": "4.1.1",
-    "debug": "4.1.1",
-    "inquirer": "7.0.6",
-    "js-yaml": "3.13.1",
+    "commander": "13.1.0",
+    "debug": "4.4.0",
+    "inquirer": "12.4.1",
+    "js-yaml": "4.1.0",
     "lodash": "4.17.21",
-    "untildify": "4.0.0"
+    "untildify": "5.0.0"
   },
   "devDependencies": {
-    "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.0.0",
-    "eslint-config-prettier": "6.10.0",
-    "eslint-plugin-import": "2.20.1",
-    "eslint-plugin-prettier": "3.1.2",
-    "husky": "4.2.3",
-    "lint-staged": "10.0.8",
-    "prettier": "1.19.1"
+    "@commitlint/cli": "19.7.1",
+    "@commitlint/config-conventional": "19.7.1",
+    "eslint": "8.57.1",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "10.0.1",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-prettier": "5.2.3",
+    "husky": "9.1.7",
+    "lint-staged": "15.4.3",
+    "prettier": "3.4.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --fix",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.js": [
