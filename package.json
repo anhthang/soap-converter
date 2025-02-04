@@ -10,7 +10,7 @@
     "debug": "4.4.0",
     "inquirer": "12.4.1",
     "js-yaml": "4.1.0",
-    "lodash": "4.17.21",
+    "openapi-to-postmanv2": "^4.25.0",
     "untildify": "5.0.0"
   },
   "devDependencies": {

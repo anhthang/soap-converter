@@ -2,7 +2,7 @@ const debug = require('debug')('soap-converter:index')
 const apiWSDL = require('apiconnect-wsdl')
 const fs = require('fs')
 const yaml = require('js-yaml')
-const converter = require('./converters')
+const Converter = require('./converters')
 
 async function convert(options) {
     debug('convert', options)
@@ -40,7 +40,7 @@ async function convert(options) {
     let out
     switch (options.target) {
         case 'Postman':
-            out = converter.Postman(openApis)
+            out = await Converter.Postman(openApis[0])
             break
         case 'SwaggerJSON':
             ;[out] = openApis
