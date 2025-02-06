@@ -3,7 +3,7 @@
 const inquirer = require('inquirer').default
 const { program } = require('commander')
 const untildify = require('untildify').default
-const converter = require('..')
+const soap2rest = require('..')
 
 function isAllowedValue(regExpStr) {
     // return a function which checks the value is in the allowedValues
@@ -46,11 +46,11 @@ program
     )
     .option('--no-examples', 'Disable generating examples in the output')
     .option('--no-inline-attributes', 'Disable inline attributes in the output')
-    .action((options) => {
-        const prompts = []
+    .action(async (options) => {
+        const first = []
 
         if (!options.input) {
-            prompts.push({
+            first.push({
                 name: 'input',
                 message:
                     'Enter the URL or path to the WSDL file (example: http://example.com/service.svc?wsdl):',
@@ -58,7 +58,7 @@ program
         }
 
         if (!options.target) {
-            prompts.push({
+            first.push({
                 name: 'target',
                 message: 'Select the target format:',
                 type: 'list',
@@ -79,8 +79,12 @@ program
             })
         }
 
+        const answers = await inquirer.prompt(first)
+        Object.assign(options, answers)
+
+        const second = []
         if (options.target === 'OpenAPI' && !options.openapiVersion) {
-            prompts.push({
+            second.push({
                 name: 'openapiVersion',
                 message: 'Specify the OpenAPI version (3.0, 3.1):',
                 type: 'list',
@@ -92,21 +96,16 @@ program
         }
 
         if (!options.output) {
-            prompts.push({
+            second.push({
                 name: 'output',
                 message: 'Enter the path for the output file:',
                 filter: (input) => untildify(input),
             })
         }
 
-        if (prompts.length < 1) {
-            converter(options)
-        } else {
-            inquirer.prompt(prompts).then((answers) => {
-                const combined = options
-                Object.assign(combined, answers)
-                converter(combined)
-            })
-        }
+        const secondAnswers = await inquirer.prompt(second)
+        Object.assign(options, secondAnswers)
+
+        soap2rest(options)
     })
     .parse(process.argv)
