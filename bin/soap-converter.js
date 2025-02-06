@@ -19,26 +19,33 @@ function isAllowedValue(regExpStr) {
 program
     .option(
         '-i, --input <url>',
-        'wsdl url (e.g. http://example.com/service.svc?wsdl)',
+        'The URL of the WSDL file (e.g., `http://example.com/service.svc?wsdl`)',
     )
     .option(
-        '-t, --target <Postman|Swagger>',
-        'target type',
-        isAllowedValue('^(Postman|Swagger)$'),
+        '-t, --target <type>',
+        'The target format: `Postman Collection`, `OpenAPI 2 / Swagger`, `OpenAPI 3`.',
+        isAllowedValue('^(Postman|OpenAPI|Swagger)$'),
     )
-    .option('-o, --output <file>', 'output file (e.g. ~/output.json)')
+    .option(
+        '-v, --openapi-version <version>',
+        'Specify the OpenAPI version to use for the output (e.g., `3.0`, `3.1`). If this option is not provided, OpenAPI 2.0 (formerly Swagger 2.0) is used',
+    )
+    .option(
+        '-o, --output <file>',
+        'The path to the output file (e.g., `service.postman.json`)',
+    )
     .option(
         '-k, --api-key-header <name>',
         "specify an apiKey header name (e.g. 'X-API-Key')",
     )
-    .option('--use-security', 'enable generating wssecurity', false)
+    .option('--use-security', 'Enable WS-Security', false)
     .option(
         '--use-ibm-datapower-gateway',
-        'enable IBM DataPower Gateway headers',
+        'Enable IBM DataPower Gateway headers',
         false,
     )
-    .option('--no-examples', 'disable generating examples')
-    .option('--no-inline-attributes', 'disable inline attributes')
+    .option('--no-examples', 'Disable generating examples in the output')
+    .option('--no-inline-attributes', 'Disable inline attributes in the output')
     .action((options) => {
         const prompts = []
 
@@ -46,24 +53,40 @@ program
             prompts.push({
                 name: 'input',
                 message:
-                    'What is your WSDL URL (http://example.com/service.svc?wsdl)?',
+                    'Enter the URL or path to the WSDL file (example: http://example.com/service.svc?wsdl):',
             })
         }
 
         if (!options.target) {
             prompts.push({
                 name: 'target',
-                message: 'Target Description Format',
+                message: 'Select the target format:',
                 type: 'list',
                 choices: [
                     {
-                        name: 'Postman v2',
+                        name: 'Postman Collection v2.1',
                         value: 'Postman',
                     },
                     {
-                        name: 'Swagger / OpenAPI v2',
+                        name: 'OpenAPI 2.0 (formerly Swagger 2.0)',
                         value: 'Swagger',
                     },
+                    {
+                        name: 'OpenAPI 3',
+                        value: 'OpenAPI',
+                    },
+                ],
+            })
+        }
+
+        if (options.target === 'OpenAPI' && !options.openapiVersion) {
+            prompts.push({
+                name: 'openapiVersion',
+                message: 'Specify the OpenAPI version (3.0, 3.1):',
+                type: 'list',
+                choices: [
+                    { name: 'OpenAPI 3.0', value: '3.0' },
+                    { name: 'OpenAPI 3.1', value: '3.1' },
                 ],
             })
         }
@@ -71,8 +94,7 @@ program
         if (!options.output) {
             prompts.push({
                 name: 'output',
-                message:
-                    'Where do you want to store the output? (~/output.json)',
+                message: 'Enter the path for the output file:',
                 filter: (input) => untildify(input),
             })
         }

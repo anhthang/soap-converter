@@ -8,9 +8,10 @@ Instantly convert SOAP/WSDL definitions to REST API specifications for use with 
 
 ## Supported Formats
 
-- Postman v2.0
-- OpenAPI/Swagger v2.0 (JSON)
-- OpenAPI/Swagger v2.0 (YAML)
+- Postman Collection v2.1
+- OpenAPI 2.0 (formerly Swagger 2.0)
+- OpenAPI 3.0
+- OpenAPI 3.1
 
 ## Installation
 
@@ -37,32 +38,54 @@ npm install soap-converter --save-dev # Then use npx soap-converter or node_modu
 
 ## Command Line Options
 
-| Option                        | Description                                                                        |
-|-------------------------------|------------------------------------------------------------------------------------|
-| `-i, --input <url>`           | The URL of the WSDL file (e.g., `http://example.com/service.svc?wsdl`).            |
-| `-t, --target <type>`         | The target format: `Postman`, `SwaggerJSON`, or `SwaggerYAML`.                     |
-| `-o, --output <file>`         | The path to the output file (e.g., `service.postman.json`).                        |
-| `-k, --api-key-header <name>` | The name of the API key header (e.g., `X-API-Key`).                                |
-| `--use-security`              | Enable WS-Security.                                                                |
-| `--use-ibm-datapower-gateway` | Enable IBM DataPower Gateway headers.                                              |
-| `--no-examples`               | Disable generating examples in the output.                                         |
-| `--no-inline-attributes`      | Disable inline attributes in the output.                                           |
-| `-h, --help`                  | Display help information.                                                          |
+| Option                            | Description                                                                                                                                                                                 |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-i, --input <url>`               | The URL of the WSDL file (e.g., `http://example.com/service.svc?wsdl`).                                                                                                                     |
+| `-t, --target <type>`             | The target format: `Postman Collection v2.1`, `OpenAPI 2.0` (formerly Swagger), `OpenAPI 3.0`, `OpenAPI 3.1`. If `-v` is not specified and target is OpenAPI, OpenAPI 2.0 is default.       |
+| `-v, --openapi-version <version>` | Specify the OpenAPI version to use for the output (e.g., `3.0`, `3.1`). If this option is not provided, OpenAPI 2.0 (formerly Swagger 2.0) is used.                                         |
+| `-o, --output <file>`             | The path to the output file (e.g., `service.postman.json`).                                                                                                                                 |
+| `-k, --api-key-header <name>`     | The name of the API key header (e.g., `X-API-Key`).                                                                                                                                         |
+| `--use-security`                  | Enable WS-Security.                                                                                                                                                                         |
+| `--use-ibm-datapower-gateway`     | Enable IBM DataPower Gateway headers.                                                                                                                                                       |
+| `--no-examples`                   | Disable generating examples in the output.                                                                                                                                                  |
+| `--no-inline-attributes`          | Disable inline attributes in the output.                                                                                                                                                    |
+| `-h, --help`                      | Display help information.                                                                                                                                                                   |
 
 ## Examples
 
+- Basic conversion to Postman
 ```bash
-# Basic conversion to Postman
-soap-converter -i [http://example.com/service.svc?wsdl](http://example.com/service.svc?wsdl) -t Postman -o service.postman.json
+soap-converter -i http://example.com/service.svc?wsdl -t Postman -o service.postman.json
+```
 
-# Conversion to Swagger YAML with API key
-soap-converter -i [http://example.com/service.svc?wsdl](http://example.com/service.svc?wsdl) -t SwaggerYAML -o service.swagger.yaml -k MyApiKey
+- Conversion to Swagger (OpenAPI v2)
+```bash
+soap-converter -i http://example.com/service.svc?wsdl -t Swagger -o service.swagger.json
+```
 
-# Conversion with WS-Security enabled
-soap-converter -i [http://example.com/service.svc?wsdl](http://example.com/service.svc?wsdl) -t Postman -o service.postman.json --use-security
+- Conversion to OpenAPI v3.1
+```bash
+soap-converter -i http://example.com/service.svc?wsdl -t OpenAPI -v 3.1 -o service.openapi.json
+```
 
-# Conversion to Swagger JSON, disabling examples
-soap-converter -i [http://example.com/service.svc?wsdl](http://example.com/service.svc?wsdl) -t SwaggerJSON -o service.swagger.json --no-examples
+- Conversion to OpenAPI v3.1 with API key
+```bash
+soap-converter -i http://example.com/service.svc?wsdl -t OpenAPI -v 3.1 -o service.openapi.json -k MyApiKey
+```
+
+- Conversion to OpenAPI v3.0 with no examples
+```bash
+soap-converter -i http://example.com/service.svc?wsdl -t OpenAPI -v 3.0 -o service.openapi.json --no-examples
+```
+
+- Conversion with WS-Security enabled (works with any target)
+```bash
+soap-converter -i http://example.com/service.svc?wsdl -t OpenAPI -v 3.1 -o service.openapi.json --use-security
+```
+
+- Conversion to Postman with IBM DataPower Gateway headers
+```bash
+soap-converter -i http://example.com/service.svc?wsdl -t Postman -o service.postman.json --use-ibm-datapower-gateway
 ```
 
 ## Handling Complex WSDLs

@@ -10,6 +10,7 @@ async function convert(options) {
     const serviceData = apiWSDL.getWSDLServices(wsdls)
 
     const opts = {
+        openapiVersion: options.openapiVersion,
         inlineAttributes: options.inlineAttributes,
         suppressExamples: !options.examples,
         // type: 'wsdl-to-rest',
@@ -40,12 +41,13 @@ async function convert(options) {
         case 'Postman':
             out = await Converter.Postman(openApis[0])
             break
+        case 'OpenAPI':
         case 'Swagger':
             ;[out] = openApis
             break
         default:
             throw new Error(
-                `output format [${options.target}] currently not supported`,
+                `Output format [${options.target}] currently not supported`,
             )
     }
 
