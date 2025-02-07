@@ -1,13 +1,12 @@
 {
   "name": "soap-converter",
   "version": "0.2.1",
-  "description": "Instantly convert SOAP/WSDL definitions to REST API specifications for use with Postman, Swagger, and other API development tools.",
+  "description": "Instantly convert SOAP/WSDL definitions to REST API specifications for use with Postman, OpenAPI/Swagger, and other API development tools.",
   "main": "index.js",
   "bin": "./bin/soap-converter.js",
   "dependencies": {
     "apiconnect-wsdl": "2.0.36",
     "commander": "13.1.0",
-    "debug": "4.4.0",
     "inquirer": "12.4.1",
     "openapi-to-postmanv2": "^4.25.0",
     "untildify": "5.0.0"

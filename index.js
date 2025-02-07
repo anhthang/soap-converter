@@ -1,13 +1,10 @@
-const debug = require('debug')('soap-converter:index')
-const apiWSDL = require('apiconnect-wsdl')
+const Connnector = require('apiconnect-wsdl')
 const fs = require('fs')
 const Converter = require('./converters')
 
 async function convert(options) {
-    debug('convert', options)
-
-    const wsdls = await apiWSDL.getJsonForWSDL(options.input)
-    const serviceData = apiWSDL.getWSDLServices(wsdls)
+    const wsdls = await Connnector.getJsonForWSDL(options.input)
+    const serviceData = Connnector.getWSDLServices(wsdls)
 
     const opts = {
         openapiVersion: options.openapiVersion,
@@ -22,7 +19,7 @@ async function convert(options) {
         const { service: svcName, filename: wsdlId } =
             serviceData.services[item]
 
-        const openapi = apiWSDL.createOpenApi(
+        const openapi = Connnector.createOpenApi(
             options.input,
             svcName,
             wsdlId,

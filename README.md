@@ -1,6 +1,6 @@
 # SOAP to REST API Converter
 
-Instantly convert SOAP/WSDL definitions to REST API specifications for use with Postman, Swagger, and other API development tools. This simplifies integration with modern systems and allows you to leverage the power and flexibility of RESTful APIs.
+Instantly convert SOAP/WSDL definitions to REST API specifications for use with Postman, OpenAPI/Swagger, and other API development tools. This simplifies integration with modern systems and allows you to leverage the power and flexibility of RESTful APIs.
 
 [![npm](https://flat.badgen.net/npm/v/soap-converter)](https://npm.im/soap-converter)
 ![download](https://flat.badgen.net/npm/dt/soap-converter)
@@ -9,9 +9,7 @@ Instantly convert SOAP/WSDL definitions to REST API specifications for use with 
 ## Supported Formats
 
 - Postman Collection v2.1
-- OpenAPI 2.0 (formerly Swagger 2.0)
-- OpenAPI 3.0
-- OpenAPI 3.1
+- OpenAPI 2.0 (formerly Swagger 2.0), 3.0, 3.1
 
 ## Installation
 
