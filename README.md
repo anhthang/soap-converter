@@ -100,4 +100,8 @@ If you encounter any issues, please create an Issue to report the problem, provi
 
 ## License
 
-[MIT](LICENSE)
+This project is released under the [MIT License](LICENSE). However, it includes dependencies that have different licensing terms. Specifically, it depends on [`apiconnect-wsdl`](https://www.npmjs.com/package/apiconnect-wsdl), which is licensed under the **IBM International Program License Agreement (IPLA)**.  
+
+Users must review and comply with the IPLA before using this package.
+
+By using this project, you acknowledge that some dependencies are subject to IBM’s licensing terms, which may impose additional restrictions beyond the MIT License.
