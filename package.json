@@ -1,6 +1,6 @@
 {
   "name": "soap-converter",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Instantly convert SOAP/WSDL definitions to REST API specifications for use with Postman, OpenAPI/Swagger, and other API development tools.",
   "main": "index.js",
   "bin": "./bin/soap-converter.js",
