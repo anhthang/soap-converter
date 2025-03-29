@@ -7,21 +7,21 @@
   "dependencies": {
     "apiconnect-wsdl": "2.0.36",
     "commander": "13.1.0",
-    "inquirer": "12.4.1",
-    "openapi-to-postmanv2": "^4.25.0",
+    "inquirer": "12.5.0",
+    "openapi-to-postmanv2": "^5.0.0",
     "untildify": "5.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.7.1",
-    "@commitlint/config-conventional": "19.7.1",
+    "@commitlint/cli": "19.8.0",
+    "@commitlint/config-conventional": "19.8.0",
     "eslint": "8.57.1",
     "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-prettier": "10.0.1",
+    "eslint-config-prettier": "10.1.1",
     "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-prettier": "5.2.3",
+    "eslint-plugin-prettier": "5.2.5",
     "husky": "9.1.7",
-    "lint-staged": "15.4.3",
-    "prettier": "3.4.2"
+    "lint-staged": "15.5.0",
+    "prettier": "3.5.3"
   },
   "scripts": {
     "lint": "eslint --fix",
@@ -52,5 +52,5 @@
     "url": "https://github.com/anhthang/soap-converter/issues"
   },
   "homepage": "https://github.com/anhthang/soap-converter#readme",
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.8.0"
 }
