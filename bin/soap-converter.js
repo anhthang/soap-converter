@@ -6,10 +6,17 @@ const untildify = require('untildify').default
 const soap2rest = require('..')
 
 function isAllowedValue(regExpStr) {
-    // return a function which checks the value is in the allowedValues
+    const pattern = new RegExp(regExpStr)
+
     return (value) => {
-        if (!RegExp(regExpStr).test(value)) {
-            throw Error(`Invalid option value: ${value}`)
+        if (typeof value !== 'string') {
+            throw new TypeError(`Expected a string, received ${typeof value}`)
+        }
+
+        if (!pattern.test(value)) {
+            throw new Error(
+                `Invalid option value: "${value}". Must match: ${regExpStr}`,
+            )
         }
 
         return value
@@ -17,50 +24,52 @@ function isAllowedValue(regExpStr) {
 }
 
 program
-    .option(
-        '-i, --input <url>',
-        'The URL of the WSDL file (e.g., `http://example.com/service.svc?wsdl`)',
-    )
+    .option('-i, --input <url>', 'URL or path to the WSDL file (required)')
     .option(
         '-t, --target <type>',
-        'The target format: `Postman Collection`, `OpenAPI 2 / Swagger`, `OpenAPI 3`.',
+        'Output format: `Postman Collection v2.1`, `OpenAPI 2.0 (formerly Swagger)`, or `OpenAPI 3`',
         isAllowedValue('^(Postman|OpenAPI|Swagger)$'),
     )
     .option(
         '-v, --openapi-version <version>',
-        'Specify the OpenAPI version to use for the output (e.g., `3.0`, `3.1`). If this option is not provided, OpenAPI 2.0 (formerly Swagger 2.0) is used',
+        'OpenAPI version (`3.0`, or `3.1`) — required if target is `OpenAPI 3`',
     )
     .option(
         '-o, --output <file>',
-        'The path to the output file (e.g., `service.postman.json`)',
+        'Output path including filename (e.g. `./converted/weather.openapi.json`)',
     )
     .option(
         '-k, --api-key-header <name>',
-        "specify an apiKey header name (e.g. 'X-API-Key')",
+        'Add a custom API key header name (e.g. `X-API-Key`)',
     )
-    .option('--use-security', 'Enable WS-Security', false)
+    .option('--use-security', 'Enable WS-Security in generated requests', false)
     .option(
         '--use-ibm-datapower-gateway',
-        'Enable IBM DataPower Gateway headers',
+        'Add IBM DataPower Gateway-specific headers to requests',
         false,
     )
-    .option('--no-examples', 'Disable generating examples in the output')
-    .option('--no-inline-attributes', 'Disable inline attributes in the output')
+    .option(
+        '--no-examples',
+        'Skip generating example request/response payloads',
+    )
+    .option(
+        '--no-inline-attributes',
+        'Avoid embedding XML attributes inline; separates them for better clarity',
+    )
     .action(async (options) => {
         const first = []
 
         if (!options.input) {
             first.push({
                 name: 'input',
-                message:
-                    'Enter the URL or path to the WSDL file (example: http://example.com/service.svc?wsdl):',
+                message: 'Enter the URL or path to the WSDL file:',
             })
         }
 
         if (!options.target) {
             first.push({
                 name: 'target',
-                message: 'Select the target format:',
+                message: 'Choose an output format:',
                 type: 'list',
                 choices: [
                     {
@@ -86,7 +95,7 @@ program
         if (options.target === 'OpenAPI' && !options.openapiVersion) {
             second.push({
                 name: 'openapiVersion',
-                message: 'Specify the OpenAPI version (3.0, 3.1):',
+                message: 'Choose OpenAPI version:',
                 type: 'list',
                 choices: [
                     { name: 'OpenAPI 3.0', value: '3.0' },
@@ -98,7 +107,7 @@ program
         if (!options.output) {
             second.push({
                 name: 'output',
-                message: 'Enter the path for the output file:',
+                message: 'Enter output file path:',
                 filter: (input) => untildify(input),
             })
         }

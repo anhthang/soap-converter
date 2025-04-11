@@ -6,51 +6,99 @@ Instantly convert SOAP/WSDL definitions to REST API specifications for use with 
 ![download](https://flat.badgen.net/npm/dt/soap-converter)
 ![license](https://flat.badgen.net/npm/license/soap-converter)
 
-## Supported Formats
+## Features
 
-- Postman Collection v2.1
-- OpenAPI 2.0 (formerly Swagger 2.0), 3.0, 3.1
+- Convert SOAP WSDL files into:​
+  - **Postman Collection v2.1​**
+  - **OpenAPI 2.0 (Swagger), 3.0, and 3.1​**
+- Facilitate RESTful interactions with SOAP-based services​
+- Compatible with any REST client supporting OpenAPI/Swagger
 
-## Installation
+## Getting Started
+
+### Installation
+
+You can install `soap-converter` globally or locally:​
+
+**Global Installation (Recommended)**:
 
 ```bash
-# Global installation (recommended)
 yarn global add soap-converter
+# or
 npm install -g soap-converter
+```
 
-# Local installation
-yarn add soap-converter  # Then use npx soap-converter or yarn soap-converter
-npm install soap-converter --save-dev # Then use npx soap-converter or node_modules/.bin/soap-converter
-````
-
-## Usage
-
-- Install `soap-converter` globally (recommended) or locally.
-- Run `soap-converter` (or `npx soap-converter` if installed locally).
-- Enter your answers as prompted, or use command-line options (see below).
-- Import the output file into your API tool of choice (e.g., Postman, Swagger UI).
+**Local Installation**:
 
 ```bash
-❯ node bin/soap-converter.js
-✔ Enter the URL or path to the WSDL file (example: http://example.com/service.svc?wsdl): https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php?wsdl
-✔ Select the target format: Postman Collection v2.1
-✔ Enter the path for the output file: weather.json
+yarn add soap-converter
+# or
+npm install soap-converter --save-dev
 ```
+
+### Run the CLI
+
+```bash
+soap-converter
+# or, if installed locally
+npx soap-converter
+```
+
+### CLI Flow
+
+1. **Enter a WSDL URL or file path**
+2. **Choose output format**:
+   - `Postman Collection v2.1`
+   - `OpenAPI 2.0 (formerly Swagger 2.0)`
+   - `OpenAPI 3`
+3. **If OpenAPI selected** → choose version:
+   - `OpenAPI 3.0`
+   - `OpenAPI 3.1`
+4. **Enter full output path including filename** (e.g. `./converted/api.postman.json` or `./converted/api.openapi.json`)
+
+**Example**:
+
+```bash
+✔ Enter the URL or path to the WSDL file:
+https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php?wsdl
+
+✔ Choose an output format:
+❯ Postman Collection v2.1
+  OpenAPI 2.0 (formerly Swagger 2.0)
+  OpenAPI 3
+
+✔ Choose OpenAPI version:
+❯ OpenAPI 3.0
+  OpenAPI 3.1
+
+✔ Enter output file path:
+./converted/weather.openapi.json
+```
+
+## Example Usage
+
+1. Paste your WSDL URL
+2. Choose output format & version
+3. Set the desired file path
+4. Import the file into:
+   - **Postman** → Import → Collection
+   - **Swagger UI** → Upload OpenAPI file
+   - **Other REST tools** → Import as OpenAPI
 
 ## Command Line Options
 
-| Option                            | Description                                                                                                                                                                                 |
-|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-i, --input <url>`               | The URL of the WSDL file (e.g., `http://example.com/service.svc?wsdl`).                                                                                                                     |
-| `-t, --target <type>`             | The target format: `Postman Collection v2.1`, `OpenAPI 2.0` (formerly Swagger), `OpenAPI 3.0`, `OpenAPI 3.1`. If `-v` is not specified and target is OpenAPI, OpenAPI 2.0 is default.       |
-| `-v, --openapi-version <version>` | Specify the OpenAPI version to use for the output (e.g., `3.0`, `3.1`). If this option is not provided, OpenAPI 2.0 (formerly Swagger 2.0) is used.                                         |
-| `-o, --output <file>`             | The path to the output file (e.g., `service.postman.json`).                                                                                                                                 |
-| `-k, --api-key-header <name>`     | The name of the API key header (e.g., `X-API-Key`).                                                                                                                                         |
-| `--use-security`                  | Enable WS-Security.                                                                                                                                                                         |
-| `--use-ibm-datapower-gateway`     | Enable IBM DataPower Gateway headers.                                                                                                                                                       |
-| `--no-examples`                   | Disable generating examples in the output.                                                                                                                                                  |
-| `--no-inline-attributes`          | Disable inline attributes in the output.                                                                                                                                                    |
-| `-h, --help`                      | Display help information.                                                                                                                                                                   |
+| Option                          | Description                                                                                |
+|---------------------------------|--------------------------------------------------------------------------------------------|
+| `-i`, `--input`                 | URL or path to the WSDL file (required)                                                    |
+| `-t`, `--target`                | Output format: `Postman Collection v2.1`, `OpenAPI 2.0 (formerly Swagger)`, or `OpenAPI 3` |
+| `-v`, `--version`               | OpenAPI version (`3.0`, or `3.1`) — required if target is `OpenAPI 3`                      |
+| `-o`, `--output`                | Output path including filename (e.g. `./converted/weather.openapi.json`)                   |
+| `-k`, `--api-key-header`        | Add a custom API key header name (e.g. `X-API-Key`)                                        |
+| `--no-examples`                 | Skip generating example request/response payloads                                          |
+| `--no-inline-attributes`        | Avoid embedding XML attributes inline; separates them for better clarity                   |
+| `--use-security`                | Enable WS-Security in generated requests                                                   |
+| `--use-ibm-datapower-gateway`   | Add IBM DataPower Gateway-specific headers to requests                                     |
+| `-h`, `--help`                  | Show help message                                                                          |
 
 ## Examples
 
