@@ -14,6 +14,11 @@ Instantly convert SOAP/WSDL definitions to REST API specifications for use with 
 - Facilitate RESTful interactions with SOAP-based services​
 - Compatible with any REST client supporting OpenAPI/Swagger
 
+> [!NOTE]
+> For the best experience with **Hoppscotch**, I recommend first converting your WSDL to a **Postman Collection**, then importing that collection into Hoppscotch.
+>
+> I’ve tested Hoppscotch’s specs, but they didn’t work as expected—so direct conversion to Hoppscotch format is on hold for now.
+
 ## Getting Started
 
 ### Installation
